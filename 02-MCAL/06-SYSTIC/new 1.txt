@@ -1,0 +1,25 @@
+//void SYSTICK_voidSetIntervalSingle(u32 Copy_u32Ticks , void (*Copy_ptr)(void));
+//void SYSTICK_voidSetIntervalPeriodic(u32 Copy_u32Ticks , void (*Copy_ptr)(void));
+
+
+void SYSTICK_voidSetIntervalPeriodic(u32 Copy_u32Ticks , void (*Copy_ptr)(void)){
+	CallBackFunction =  Copy_ptr ;
+	/* Reload Value */
+	SYSTICK_ACCESS_REGISTERS -> STK_LOAD = Copy_u32Ticks;
+	/*Enable Interrupt */
+	SET_BIT(SYSTICK_ACCESS_REGISTERS -> STK_CTRL,1);
+	/* Enable SYSTICK*/
+	SET_BIT(SYSTICK_ACCESS_REGISTERS -> STK_CTRL,0);
+	u8 sigle = 1;
+}
+
+void SYSTICK_voidSetIntervalSingle(u32 Copy_u32Ticks , void (*Copy_ptr)(void)){
+	CallBackFunction =  Copy_ptr ;
+	/* Reload Value */
+	SYSTICK_ACCESS_REGISTERS -> STK_LOAD = Copy_u32Ticks;
+	/*Enable Interrupt */
+	SET_BIT(SYSTICK_ACCESS_REGISTERS -> STK_CTRL,1);
+	/* Enable SYSTICK*/
+	SET_BIT(SYSTICK_ACCESS_REGISTERS -> STK_CTRL,0);
+	u8 sigle = 0;
+}
